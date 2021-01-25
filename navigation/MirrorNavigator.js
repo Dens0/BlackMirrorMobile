@@ -64,7 +64,7 @@ const ElementsNavigator = createStackNavigator(
 const AccountNavigator = createStackNavigator(
   {
       Account: AccountScreen,
-      // EditProduct: EditProductScreen
+      // EditProduct: EditElementScreen
   },
   {
       navigationOptions: {
