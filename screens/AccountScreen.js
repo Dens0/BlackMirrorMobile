@@ -30,6 +30,7 @@ AccountScreen.navigationOptions = navData => {
                     }}
                 />
             </HeaderButtons>
+
         ),
 
     };

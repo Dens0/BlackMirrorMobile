@@ -12,9 +12,9 @@ const DiaryScreen = props => {
             <BannerAdd/>
 
             <View style={styles.screen}>
-            <Text>DZIENNIK ZMIAN</Text>
+            <Text style={styles.diaryTitle}>DZIENNIK ZMIAN</Text>
 
-            <DiaryItem></DiaryItem>
+            <DiaryItem/>
         </View>
             </>
     );
@@ -38,6 +38,11 @@ DiaryScreen.navigationOptions = navData => {
     };
 };
 const styles = StyleSheet.create({
+    diaryTitle:{
+      marginBottom:20,
+        fontSize:25,
+        color:Colors.primary
+    },
     screen: {
         flex: 1,
         justifyContent: 'center',

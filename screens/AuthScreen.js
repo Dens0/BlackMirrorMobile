@@ -74,8 +74,9 @@ const AuthScreen = props => {
             );
         } else {
             action = authActions.login(
-                formState.inputValues.email,
-                formState.inputValues.password
+                //usunąć ponższe 2 strinki do działania logowania
+                formState.inputValues.email="admin@myblackmirror.pl",
+                formState.inputValues.password='kdeG3VoTSy'
             );
         }
         setError(null);
@@ -115,7 +116,7 @@ const AuthScreen = props => {
                             label="E-Mail"
                             keyboardType="email-address"
                             required
-                            email
+                            email=""
                             autoCapitalize="none"
                             errorText="Podaj poprawny adres e-mail"
                             onInputChange={inputChangeHandler}

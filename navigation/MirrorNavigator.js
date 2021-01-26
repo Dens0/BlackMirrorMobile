@@ -25,6 +25,17 @@ import AuthScreen from "../screens/AuthScreen";
 import * as authActions from '../store/actions/auth'
 import LogoutButton from "../components/UI/LogoutButton";
 import Colors from '../constants/Colors';
+import WeatherScreen from "../screens/ElementsScreens/WeatherScreen";
+import TimeScreen from "../screens/ElementsScreens/TimeScreen";
+import NewsScreen from "../screens/ElementsScreens/NewsScreen";
+import TaskScreen from "../screens/ElementsScreens/TaskScreen";
+import CalendarScreen from "../screens/ElementsScreens/CalendarScreen";
+import AirScreen from "../screens/ElementsScreens/AirScreen";
+import CovidScreen from "../screens/ElementsScreens/CovidScreen";
+import TimeTableScreen from "../screens/ElementsScreens/TimeTableScreen";
+import SensorsScreen from "../screens/ElementsScreens/SensorsScreen";
+import CameraScreen from "../screens/ElementsScreens/CameraScreen";
+
 
 const defaultNavOptions = {
     drawerLabel: 'Elementy',
@@ -44,6 +55,16 @@ const defaultNavOptions = {
 const ElementsNavigator = createStackNavigator(
   {
       ElementsOverView: ElementsOverviewScreen,
+      time:TimeScreen,
+      weather:WeatherScreen,
+      news:NewsScreen,
+      tasks:TaskScreen,
+      calendar:CalendarScreen,
+      air:AirScreen,
+      sensors:SensorsScreen,
+      camera:CameraScreen,
+      covid:CovidScreen,
+      timetable:TimeTableScreen,
   },
   {
       navigationOptions: {
@@ -215,7 +236,6 @@ const MirrorNavigator = createDrawerNavigator(
                       title="Wyloguj"
                       color={'white'}
                       onPress={() => {
-                          console.log("działa")
                           dispatch(authActions.logout());
                           props.navigation.navigate('Auth');
                       }}
