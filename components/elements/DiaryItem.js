@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import {
     View,
     Text,
-    Image,
     StyleSheet,
     TouchableOpacity,
     TouchableNativeFeedback,
     Platform,
-    ActivityIndicator
+    ActivityIndicator,
+    ScrollView
 } from 'react-native';
 import * as SecureStore from "expo-secure-store";
 import Colors from "../../constants/Colors";
@@ -25,7 +25,7 @@ const DiaryItem = props => {
             return JSON.parse(res);
         });
 
-        const commits = fetch('https://myblackmirror.pl/api/v1/data/changelog', {
+        fetch('https://myblackmirror.pl/api/v1/data/changelog', {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -35,34 +35,36 @@ const DiaryItem = props => {
             return res.json();
         }).then(data => {
             setCommits(data.data);
-            console.log(data.data);
         });
     };
 
     fetchData();
 
     return (
-        <View style={styles.touchable}>
-            {commits ? (
-                <>
-                    {commits.map((item) => (
-                        <>
-                            <TouchableCmp  onPress={props.onSelect} >
-                                <Text style={styles.commits}>{item.author} - {item.message}</Text>
-                            </TouchableCmp>
-                        </>
-                    ))}
-                </>
-            ) : <ActivityIndicator size="large" color="white"/>
-            }
-        </View>
+        <ScrollView>
+            <View style={styles.touchable}>
+                {commits ? (
+                    <>
+                        {commits.map((item) => (
+                            <>
+                                <TouchableCmp onPress={props.onSelect}>
+                                    <Text style={styles.commits}>{item.author} - {item.message}</Text>
+                                </TouchableCmp>
+                            </>
+                        ))}
+                    </>
+                ) : <ActivityIndicator size="large" color="white"/>
+                }
+            </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
-    commits:{
-      color: Colors.light,
+    commits: {
+        color: Colors.light,
         lineHeight: 20,
+        margin: 10,
     },
     element: {
         height: 200,
@@ -71,9 +73,9 @@ const styles = StyleSheet.create({
         // backgroundColor:Colors.secondary
     },
     touchable: {
-        padding:20,
+        padding: 20,
         borderRadius: 10,
-        width:'90%',
+        width: '90%',
         // overflow: 'hidden',
         backgroundColor: Colors.primary
     },

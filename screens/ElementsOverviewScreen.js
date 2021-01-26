@@ -46,29 +46,7 @@ const ElementsOverviewScreen = props => {
             <Text>Brak elementów do wyświetlenia</Text>
         </View>
     }
-    // const dispatch = useDispatch();
-    //
-    // const valueChangeHandler = (active,slug,id) => {
-    //     // if (config.active ===true)
-    //     // {
-    //     //   config.active = +1;
-    //     // }else
-    //     // {
-    //     //   config.active = +0;
-    //     // }
-    //     dispatch(elementsActions.updateElement(active,slug,id))
-    // }
-
-// const changeActiveHandler = useCallback()=>
-//     {
-//         console.log("zamieniane")
-//     }
-//     useEffect(()=>{
-//         props.navigation.setParams('submit':changeActiveHandler)
-//     },[changeActiveHandler])
-
-
-    return (
+       return (
         <View style={styles.screen}>
             {/*<BannerAdd/>*/}
 
@@ -81,7 +59,6 @@ const ElementsOverviewScreen = props => {
                         title={itemData.item.name}
                         image={itemData.item.icon}
                     >
-
                         <Button
                             color={Platform.OS === 'android' ? Colors.secondary : 'white'}
                             title="KONFIGURACJA"
@@ -93,6 +70,7 @@ const ElementsOverviewScreen = props => {
                                     elementId: itemData.item.id,
                                     elementConf: itemData.item.config.data.timezone,
                                     elementActive: itemData.item.active,
+                                    elementIcon:itemData.item.icon
                                 })
                             }}
                         />
