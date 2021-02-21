@@ -21,12 +21,10 @@ const EditElementScreen = props => {
 
     const elementId = props.navigation.getParam('elementId');
     const editedElement = useSelector(state =>
-        // state.elements.availableProducts.find(prod => prod.id === prodId)
         state.elements.availableElements.find(prod => prod.id === elementId)
     );
 
     // ZMIANY W ZALEŻNOŚCI OD KOLEJNYCH INPUTÓW KTÓRE BYĘDZIEMY WYSYŁAĆ NA SERWER
-    const [title, setTitle] = useState(editedElement ? editedElement.title : '')
     const [active, setActive] = useState(editedElement ? editedElement.active : !editedElement.active)
     const [slug, setSlug] = useState(editedElement ? editedElement.slug : '')
     const [timeZone, setTimeZone] = useState(editedElement ? editedElement.config.data.timezone : '')

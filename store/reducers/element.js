@@ -1,10 +1,8 @@
-// import ELEMENTS from '../../data/dummy-data';
 import {UPDATE_ELEMENTS, SET_ELEMENTS} from "../actions/elements";
 import Element from "../../models/element";
 
 const initialState = {
     // availableElements: ELEMENTS,
-    // userProducts: ELEMENTS.filter(prod => prod.ownerId === 'u1')
 };
 
 export default (state = initialState, action) => {
@@ -21,7 +19,7 @@ export default (state = initialState, action) => {
             );
             const updatedAvailableElements = [...state.availableElements]
             updatedAvailableElements[availableElementsIndex] = updatedElement
-            return {...state,availableElements: updatedAvailableElements }
+            return {...state, availableElements: updatedAvailableElements}
     }
     return state;
 };

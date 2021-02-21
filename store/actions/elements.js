@@ -1,20 +1,25 @@
 import Element from "../../models/element";
 import * as SecureStore from "expo-secure-store";
+import {AsyncStorage} from "react-native";
 
 export const SET_ELEMENTS = 'SET_ELEMENTS';
 export const UPDATE_ELEMENTS = 'EDIT_ELEMENTS';
 
 export const fetchElements = () => {
     return async dispatch => {
-        let userData = SecureStore.getItemAsync('userData').then(res => {
-            return JSON.parse(res);
-        });
+        // let userData = SecureStore.getItemAsync('userData').then(res => {
+        //     return JSON.parse(res);
+        // });
+        let userData = await AsyncStorage.getItem('userData');
+        const userToken = JSON.parse(userData)
+        // console.log(userData.data, "Obiekt Usera ")
+
         const response = await fetch(
-            "https://myblackmirror.pl/api/v1/features?api_token=test&fbclid=IwAR39_0YfG6rwM3nPVyVq0PmrIARnSY2U9C4wBpQ7ZH1Zhq6nAghpjOuhibI",
+            "https://myblackmirror.pl/api/v1/features",
             {
                 headers: new Headers({
                     'Accept': 'application/json',
-                    'Authorization': 'Bearer ' + userData.api_token
+                    'Authorization': 'Bearer ' + userToken.token
                 })
             }
         );
@@ -75,21 +80,7 @@ export const updateElement = (id, active, slug) => {
                 active,
             }
         });
-        // console.log(response)
-        // if (!response.ok) {
-        //     throw new Error('Something went wrong!');
-        // }
-        // const resData = response.json();
-        // console.log(resData)
-        // dispatch({
-        //     type: UPDATE_ELEMENTS,
-        //     pid: id,
-        //     productData: {
-        //         active,
-        //         slug,
-        //
-        //     }
-        // });
+       
 
     }
 };

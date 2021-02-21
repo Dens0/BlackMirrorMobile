@@ -5,7 +5,6 @@ import HeaderButton from "../components/UI/HeaderButton";
 import Colors from "../constants/Colors";
 import BannerAdd from "../components/Adds/BannerAdd";
 import email from 'react-native-email'
-import ElementItem from "../components/elements/ElementItem";
 
 const ContactScreen = props => {
     const handleEmail = () => {
@@ -89,8 +88,7 @@ const styles = StyleSheet.create({
 
     }, vievButton: {
         backgroundColor: Colors.tertiary2,
-        borderRadius: 5,
-    }
+            }
 });
 
 export default ContactScreen;

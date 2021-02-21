@@ -31,6 +31,7 @@ export const signup = (email, password) => {
             }
         );
 
+        // console.log(response)
         if (!response.ok) {
             const errorResData = await response.json();
             const errorId = errorResData.error.message;
@@ -42,8 +43,6 @@ export const signup = (email, password) => {
         }
 
         const resData = await response.json();
-        console.log(response)
-        console.log(resData)
         dispatch(
             authenticate(
                 resData.localId,
@@ -81,6 +80,7 @@ export const login = (email, password) => {
         }
 
         const resData = await response.json();
+        // console.log(resData)
         dispatch(
             authenticate(
                 resData.data.id,
@@ -95,6 +95,7 @@ export const login = (email, password) => {
             'userData',
             JSON.stringify(resData.data)
         );
+        // console.log(resData.data.api_token)
         saveDataToStorage(resData.data.api_token, resData.data.id, expirationDate);
     };
 };

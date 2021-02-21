@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
     View,
     Text,
@@ -8,7 +8,6 @@ import {
     Platform
 } from 'react-native';
 import { SvgCssUri } from 'react-native-svg';
-
 import Colors from "../../constants/Colors";
 import Card from '../UI/Card';
 
@@ -26,6 +25,9 @@ const ElementItem = props => {
             <View style={styles.touchable}>
                 <TouchableCmp onPress={props.onSelect} useForeground>
                     <View>
+                        <View style={styles.details}>
+                            <Text style={styles.title}>{props.title}</Text>
+                        </View>
                         <View style={styles.imageContainer}>
                             <SvgCssUri
                                 width="60%"
@@ -33,9 +35,7 @@ const ElementItem = props => {
                                 uri={props.image}
                             />
                         </View>
-                        <View style={styles.details}>
-                            <Text style={styles.title}>{props.title}</Text>
-                        </View>
+
                         <View style={styles.actions}>
                             {props.children}
                         </View>
@@ -54,15 +54,13 @@ const styles = StyleSheet.create({
         // backgroundColor:Colors.secondary
     },
     touchable: {
-        borderRadius: 10,
+
         overflow: 'hidden',
         backgroundColor: Colors.primary
     },
     imageContainer: {
         width: '100%',
         height: '54%',
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
         overflow: 'hidden',
         backgroundColor: Colors.tertiary,
         alignItems: 'center',

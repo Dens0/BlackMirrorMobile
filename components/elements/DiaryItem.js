@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     View,
     Text,
@@ -11,9 +11,14 @@ import {
 } from 'react-native';
 import * as SecureStore from "expo-secure-store";
 import Colors from "../../constants/Colors";
+import {FontAwesome} from "@expo/vector-icons";
 
 const DiaryItem = props => {
-    const [commits, setCommits] = useState();
+    const [commitsMobile, setCommitsMobile] = useState();
+    const [commitsPanel, setCommitsPanel] = useState();
+    const [commitsClient, setCommitsClient] = useState();
+    const [author, setauthor] = useState('');
+    const [diary, setDiary] = useState('');
     let TouchableCmp = TouchableOpacity;
 
     if (Platform.OS === 'android' && Platform.Version >= 21) {
@@ -25,36 +30,105 @@ const DiaryItem = props => {
             return JSON.parse(res);
         });
 
-        fetch('https://myblackmirror.pl/api/v1/data/changelog', {
+        const apiCall = await fetch('https://myblackmirror.pl/api/v1/data/changelog', {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + userData.api_token
             })
-        }).then(res => {
-            return res.json();
-        }).then(data => {
-            setCommits(data.data);
-        });
-    };
 
-    fetchData();
+        })
+        const diaryData = await apiCall.json()
+        setDiary(diaryData.data)
+    };
+    useEffect(() => {
+        fetchData();
+    })
+console.log(diary)
+    // const fetchData = async () => {
+    //     return async dispatch => {
+    //         let userData = await SecureStore.getItemAsync('userData').then(res => {
+    //             return JSON.parse(res);
+    //         });
+    //
+    //         await  fetch('https://myblackmirror.pl/api/v1/data/changelog', {
+    //             method: 'GET',
+    //             headers: new Headers({
+    //                 'Content-Type': 'application/json',
+    //                 'Authorization': 'Bearer ' + userData.api_token
+    //             })
+    //         }).then(res => {
+    //             return res.json();
+    //         }).then(data => {
+    //             setCommitsMobile(data.data["Aplikacja Mobilna"]);
+    //             setCommitsPanel(data.data["Panel Administracyjny"]);
+    //             setCommitsClient(data.data["Aplikacja Kliencka"]);
+    //             return 1
+    //         }).catch("bład");
+    //         console.log(commitsMobile)
+    //         dispatch({
+    //             setCommitsMobile:data.data["Aplikacja Mobilna"],
+    //         setCommitsPanel:data.data["Aplikacja Mobilna"],
+    //         setCommitsClient:data.data["Aplikacja Mobilna"]})
+    //     }
+    // };
+    //
+    // fetchData();
 
     return (
-        <ScrollView>
-            <View style={styles.touchable}>
-                {commits ? (
-                    <>
-                        {commits.map((item) => (
-                            <>
-                                <TouchableCmp onPress={props.onSelect}>
-                                    <Text style={styles.commits}>{item.author} - {item.message}</Text>
-                                </TouchableCmp>
-                            </>
-                        ))}
-                    </>
-                ) : <ActivityIndicator size="large" color="white"/>
-                }
+        <ScrollView key={props.key}>
+            <View>
+                <View>
+                    {commitsMobile ? (
+                        <>
+                            <Text style={styles.diaryTitle}>Aplikacja mobilna</Text>
+                            {commitsMobile.map((item) => (
+                                <>
+                                    <Text style={styles.date}><FontAwesome style={{marginRight: 10}} name="history"
+                                                                           size={16}
+                                                                           color="white"/><Text
+                                        style={styles.date}>{item.date}</Text></Text>
+                                    <Text style={styles.commits}> {item.author} - {item.message}</Text>
+
+                                </>
+                            ))}
+                        </>
+                    ) : <ActivityIndicator size="large" color="white"/>
+                    }
+                </View>
+                <View>
+                    {commitsPanel ? (
+                        <>
+                            <Text>Panel Aministracyjny </Text>
+                            {commitsPanel.map((item) => (
+                                <>
+                                    <Text style={styles.date}><FontAwesome style={styles.icon} name="history" size={16}
+                                                                           color="white"/><Text
+                                        style={styles.date}>{item.date}</Text></Text>
+                                    <Text style={styles.commits}> {item.author} - {item.message}</Text>
+
+                                </>
+                            ))}
+                        </>
+                    ) : <ActivityIndicator size="large" color="white"/>
+                    }
+                </View>
+                <View>
+                    {commitsClient ? (
+                        <>
+                            <Text style={styles.diaryTitle}>Aplikacja kliencka</Text>
+                            {commitsClient.map((item) => (
+                                <>
+                                    <Text style={styles.date}><FontAwesome style={styles.icon} name="history" size={16}
+                                                                           color="white"/><Text>{item.date}</Text></Text>
+                                    <Text style={styles.commits}> {item.author} - {item.message}</Text>
+
+                                </>
+                            ))}
+                        </>
+                    ) : <ActivityIndicator size="large" color="white"/>
+                    }
+                </View>
             </View>
         </ScrollView>
     );
@@ -70,13 +144,11 @@ const styles = StyleSheet.create({
         height: 200,
         margin: 20,
         marginHorizontal: 40,
-        // backgroundColor:Colors.secondary
     },
     touchable: {
         padding: 20,
-        borderRadius: 10,
+
         width: '90%',
-        // overflow: 'hidden',
         backgroundColor: Colors.primary
     },
     imageContainer: {
@@ -93,13 +165,11 @@ const styles = StyleSheet.create({
         width: '50%',
         height: '50%',
         resizeMode: 'contain',
-        // backgroundColor:Colors.primary
 
     },
     details: {
         alignItems: 'center',
         height: '17%',
-        // padding: 10,
 
     },
     title: {
@@ -112,17 +182,36 @@ const styles = StyleSheet.create({
         color: '#f5f5f5',
     },
     actions: {
-        // flexDirection: 'row',
-        // paddingTop: 16,
         alignItems: 'center',
         height: '23%',
-        // paddingHorizontal: 20,
         backgroundColor: Colors.tertiary,
         color: '#f5f5f5',
         justifyContent: 'center',
 
         alignContent: 'center',
-    }
+    },
+    icon: {
+        marginRight: 10,
+    },
+    date: {
+        margin: 10,
+        borderRadius: 8,
+        paddingLeft: 10,
+        color: Colors.light,
+        backgroundColor: Colors.primary,
+        padding: 10
+
+    },
+    diaryTitle: {
+        marginBottom: 30,
+        backgroundColor: Colors.primary,
+        color: Colors.light,
+        fontFamily: 'Quicksand-bold',
+        textAlign: 'center',
+        fontSize: 20,
+        paddingTop: 20,
+        paddingBottom: 20,
+    },
 });
 
 export default DiaryItem;

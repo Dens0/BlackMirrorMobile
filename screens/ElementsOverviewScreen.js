@@ -1,12 +1,11 @@
 import React, {useEffect, useCallback, useState} from 'react';
-import {View, Text, FlatList, Button, Switch, Platform, StyleSheet, ActivityIndicator} from 'react-native';
+import {View, Text, FlatList, Button,Platform, StyleSheet, ActivityIndicator} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import HeaderButton from '../components/UI/HeaderButton';
 import ElementItem from '../components/elements/ElementItem';
 import Colors from '../constants/Colors';
 import * as elementActions from '../store/actions/elements'
-import * as elementsActions from "../store/actions/elements";
 // import {colors} from "react-native-svg/lib/typescript/lib/extract/extractColor";
 
 //AD
@@ -19,11 +18,6 @@ import * as elementsActions from "../store/actions/elements";
 const ElementsOverviewScreen = props => {
     const [isLoading, setIsLoading] = useState(false)
     const elements = useSelector(state => state.elements.availableElements);
-    const [isOn, setIsOn] = useState()
-    const [active, setActive] = useState(true)
-
-    // const useEffect
-    // const [active, setActive] = useState(editedElement ? editedElement.config.active : '')
 
     const dispach = useDispatch();
     useEffect(() => {
@@ -58,6 +52,18 @@ const ElementsOverviewScreen = props => {
                     <ElementItem
                         title={itemData.item.name}
                         image={itemData.item.icon}
+                        onPress={ () => {
+                            itemData.navigation.navigate("EditElementScreen", {
+                                    elementName: itemData.item.name,
+                                    elementSlug: itemData.item.slug,
+                                    elementImg: itemData.item.img,
+                                    elementId: itemData.item.id,
+                                    elementConf: itemData.item.config.data.timezone,
+                                    elementActive: itemData.item.active,
+                                    elementIcon:itemData.item.icon,
+                                },
+                                    console.log('navigate'))
+                        }}
                     >
                         <Button
                             color={Platform.OS === 'android' ? Colors.secondary : 'white'}

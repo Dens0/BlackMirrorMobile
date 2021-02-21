@@ -4,17 +4,14 @@ import { Provider } from 'react-redux';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import ReduxThunk from 'redux-thunk'
-import productsReducer from './store/reducers/element';
-import MirrorNavigator from './navigation/MirrorNavigator';
-import BannerAdd from "./components/Adds/BannerAdd";
-import FullAdd from "./components/Adds/FullAdd";
-import {View} from "react-native";
 import elementsReducer from './store/reducers/element';
 import authReducer from './store/reducers/auth';
+import diaryReducer from './store/reducers/diary'
 import NavigationContainer from "./navigation/NavigationContainer";
 const rootReducer = combineReducers({
   elements: elementsReducer,
-  auth: authReducer
+  auth: authReducer,
+  diaries: diaryReducer,
 });
 const store = createStore(rootReducer,applyMiddleware(ReduxThunk));
 
