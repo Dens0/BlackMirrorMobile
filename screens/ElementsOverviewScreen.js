@@ -1,5 +1,5 @@
 import React, {useEffect, useCallback, useState} from 'react';
-import {View, Text, FlatList, Button,Platform, StyleSheet, ActivityIndicator} from 'react-native';
+import {View, Text, FlatList, Button, Platform, StyleSheet, ActivityIndicator} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import HeaderButton from '../components/UI/HeaderButton';
@@ -18,7 +18,7 @@ import * as elementActions from '../store/actions/elements'
 const ElementsOverviewScreen = props => {
     const [isLoading, setIsLoading] = useState(false)
     const elements = useSelector(state => state.elements.availableElements);
-
+// console.log(elements)
     const dispach = useDispatch();
     useEffect(() => {
         const loadProducts = async () => {
@@ -40,7 +40,8 @@ const ElementsOverviewScreen = props => {
             <Text>Brak elementów do wyświetlenia</Text>
         </View>
     }
-       return (
+        // console.log(elements)
+    return (
         <View style={styles.screen}>
             {/*<BannerAdd/>*/}
 
@@ -52,7 +53,7 @@ const ElementsOverviewScreen = props => {
                     <ElementItem
                         title={itemData.item.name}
                         image={itemData.item.icon}
-                        onPress={ () => {
+                        onPress={() => {
                             itemData.navigation.navigate("EditElementScreen", {
                                     elementName: itemData.item.name,
                                     elementSlug: itemData.item.slug,
@@ -60,9 +61,9 @@ const ElementsOverviewScreen = props => {
                                     elementId: itemData.item.id,
                                     elementConf: itemData.item.config.data.timezone,
                                     elementActive: itemData.item.active,
-                                    elementIcon:itemData.item.icon,
+                                    elementIcon: itemData.item.icon,
                                 },
-                                    console.log('navigate'))
+                                console.log('navigate'))
                         }}
                     >
                         <Button
@@ -76,7 +77,7 @@ const ElementsOverviewScreen = props => {
                                     elementId: itemData.item.id,
                                     elementConf: itemData.item.config.data.timezone,
                                     elementActive: itemData.item.active,
-                                    elementIcon:itemData.item.icon
+                                    elementIcon: itemData.item.icon
                                 })
                             }}
                         />

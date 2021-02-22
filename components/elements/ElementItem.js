@@ -35,7 +35,6 @@ const ElementItem = props => {
                                 uri={props.image}
                             />
                         </View>
-
                         <View style={styles.actions}>
                             {props.children}
                         </View>

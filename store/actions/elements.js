@@ -13,7 +13,6 @@ export const fetchElements = () => {
         let userData = await AsyncStorage.getItem('userData');
         const userToken = JSON.parse(userData)
         // console.log(userData.data, "Obiekt Usera ")
-
         const response = await fetch(
             "https://myblackmirror.pl/api/v1/features",
             {

@@ -30,8 +30,6 @@ const EditElementScreen = props => {
     const [timeZone, setTimeZone] = useState(editedElement ? editedElement.config.data.timezone : '')
     const [icon, setIcon] = useState(editedElement ? editedElement.icon : '')
 
-    // console.log(typeof (editedElement.active))
-    // console.log(editedElement.icon)
     const dispatch = useDispatch();
 
 

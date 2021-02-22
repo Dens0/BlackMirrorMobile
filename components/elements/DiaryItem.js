@@ -44,36 +44,7 @@ const DiaryItem = props => {
     useEffect(() => {
         fetchData();
     })
-console.log(diary)
-    // const fetchData = async () => {
-    //     return async dispatch => {
-    //         let userData = await SecureStore.getItemAsync('userData').then(res => {
-    //             return JSON.parse(res);
-    //         });
-    //
-    //         await  fetch('https://myblackmirror.pl/api/v1/data/changelog', {
-    //             method: 'GET',
-    //             headers: new Headers({
-    //                 'Content-Type': 'application/json',
-    //                 'Authorization': 'Bearer ' + userData.api_token
-    //             })
-    //         }).then(res => {
-    //             return res.json();
-    //         }).then(data => {
-    //             setCommitsMobile(data.data["Aplikacja Mobilna"]);
-    //             setCommitsPanel(data.data["Panel Administracyjny"]);
-    //             setCommitsClient(data.data["Aplikacja Kliencka"]);
-    //             return 1
-    //         }).catch("bład");
-    //         console.log(commitsMobile)
-    //         dispatch({
-    //             setCommitsMobile:data.data["Aplikacja Mobilna"],
-    //         setCommitsPanel:data.data["Aplikacja Mobilna"],
-    //         setCommitsClient:data.data["Aplikacja Mobilna"]})
-    //     }
-    // };
-    //
-    // fetchData();
+
 
     return (
         <ScrollView key={props.key}>
@@ -84,10 +55,11 @@ console.log(diary)
                             <Text style={styles.diaryTitle}>Aplikacja mobilna</Text>
                             {commitsMobile.map((item) => (
                                 <>
-                                    <Text style={styles.date}><FontAwesome style={{marginRight: 10}} name="history"
+                                    <Text style={styles.date}>
+                                        <FontAwesome style={{margin: 10}} name="history"
                                                                            size={16}
                                                                            color="white"/><Text
-                                        style={styles.date}>{item.date}</Text></Text>
+                                        style={styles.date}> dd{item.date}dd</Text></Text>
                                     <Text style={styles.commits}> {item.author} - {item.message}</Text>
 
                                 </>
@@ -122,7 +94,6 @@ console.log(diary)
                                     <Text style={styles.date}><FontAwesome style={styles.icon} name="history" size={16}
                                                                            color="white"/><Text>{item.date}</Text></Text>
                                     <Text style={styles.commits}> {item.author} - {item.message}</Text>
-
                                 </>
                             ))}
                         </>
@@ -195,7 +166,6 @@ const styles = StyleSheet.create({
     },
     date: {
         margin: 10,
-        borderRadius: 8,
         paddingLeft: 10,
         color: Colors.light,
         backgroundColor: Colors.primary,
