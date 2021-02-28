@@ -7,12 +7,11 @@ const Card = props => {
 
 const styles = StyleSheet.create({
   card: {
-    shadowColor: 'black',
-    shadowOpacity: 0.25,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
-    elevation: 5,
-
+    // shadowColor: 'black',
+    shadowOpacity: 0,
+    shadowOffset: { width: 0, height:0 },
+    shadowRadius: 0,
+    elevation: 0,
   }
 });
 

@@ -1,5 +1,4 @@
 import React, {useEffect, useCallback, useState} from 'react';
-
 import {View, Text, StyleSheet, Platform, ActivityIndicator, FlatList, Button, ScrollView} from 'react-native';
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import HeaderButton from "../components/UI/HeaderButton";
@@ -44,19 +43,18 @@ const DiaryScreen = props => {
                         <View>
                             {
                                 diaries.data["Aplikacja Mobilna"] ? (
-
                                     <View>
                                         <Text style={styles.diaryTitle}>Aplikacja mobilna</Text>
 
-                                        {diaries.data["Aplikacja Mobilna"].map(item => (<>
-                                            <Text style={styles.date}>
+                                        {diaries.data["Aplikacja Mobilna"].map(item => (      <View key={item.date}>
+                                            <Text style={styles.date} key={item.date}>
                                                 <FontAwesome style={{marginRight: 10}} name="history"
                                                              size={16}
                                                              color="white"/><Text
-                                                style={styles.date}>{item.date}</Text></Text>
+                                                style={styles.date}>  {item.date}</Text></Text>
                                             <Text style={styles.commits}> {item.author} - {item.message}</Text>
 
-                                        </>))}
+                                        </View>))}
 
 
                                     </View>) : <Text style={styles.diaryTitle}>Brak zdarzeń Aplikacja </Text>
@@ -71,21 +69,17 @@ const DiaryScreen = props => {
                                     <View>
                                         <Text style={styles.diaryTitle}>Aplikacja Kliencka</Text>
 
-                                        {diaries.data["Aplikacja Kliencka"].map(item => (<>
-                                            <Text style={styles.date}>
+                                        {diaries.data["Aplikacja Kliencka"].map(item => (  <View key={item.date}>
+                                            <Text style={styles.date} >
                                                 <FontAwesome style={{marginRight: 10}} name="history"
                                                              size={16}
                                                              color="white"/><Text
-                                                style={styles.date}>{item.date}</Text></Text>
+                                                style={styles.date}>  {item.date}</Text></Text>
                                             <Text style={styles.commits}> {item.author} - {item.message}</Text>
 
-                                        </>))}
-
-
+                                            </View>))}
                                     </View>) : <Text style={styles.diaryTitle}>Brak zdarzeń Aplikacja </Text>
                             }
-
-
                         </View>
                         <View>
                             {
@@ -94,29 +88,23 @@ const DiaryScreen = props => {
                                     <View>
                                         <Text style={styles.diaryTitle}>Panel Administracyjny</Text>
 
-                                        {diaries.data["Panel Administracyjny"].map(item => (<>
+                                        {diaries.data["Panel Administracyjny"].map(item => (  <View key={item.date}>
                                             <Text style={styles.date}>
                                                 <FontAwesome style={{marginRight: 10}} name="history"
                                                              size={16}
                                                              color="white"/><Text
-                                                style={styles.date}>{item.date}</Text></Text>
+                                                style={styles.date}>  {item.date}</Text></Text>
                                             <Text style={styles.commits}> {item.author} - {item.message}</Text>
 
-                                        </>))}
-
-
+                                        </View>))}
                                     </View>) : <Text style={styles.diaryTitle}>Brak zdarzeń Aplikacja </Text>
                             }
-
-
                         </View>
                     </>) : <Text>Brak elementów</Text>}
             </ScrollView>
         </>
     );
 };
-
-
 DiaryScreen.navigationOptions = navData => {
     return {
         headerTitle: 'Dziennik zmian',

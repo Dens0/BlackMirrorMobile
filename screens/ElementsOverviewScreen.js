@@ -1,13 +1,11 @@
 import React, {useEffect, useCallback, useState} from 'react';
-import {View, Text, FlatList, Button, Platform, StyleSheet, ActivityIndicator} from 'react-native';
+import {View, Text, FlatList, Button, Platform, StyleSheet, ActivityIndicator,SafeAreaView} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import HeaderButton from '../components/UI/HeaderButton';
 import ElementItem from '../components/elements/ElementItem';
 import Colors from '../constants/Colors';
 import * as elementActions from '../store/actions/elements'
-// import {colors} from "react-native-svg/lib/typescript/lib/extract/extractColor";
-
 //AD
 //ca-app-pub-8731014179800764~6037445767 indentyfikator aplikacji
 //ca-app-pub-8731014179800764/4768542227 identyfikator jednoski reklamowej
@@ -17,16 +15,21 @@ import * as elementActions from '../store/actions/elements'
 
 const ElementsOverviewScreen = props => {
     const [isLoading, setIsLoading] = useState(false)
+    const [isLoaded, setIsLoaded] = useState(false)
     const elements = useSelector(state => state.elements.availableElements);
-// console.log(elements)
+    const configs = useSelector(state => state.elementConfig.availableConfig);
+
+    let elementConfigs=[]
+    elementConfigs.push(elements)
+    elementConfigs.push(configs)
     const dispach = useDispatch();
     useEffect(() => {
-        const loadProducts = async () => {
+        const loadElements = async () => {
             setIsLoading(true);
             await dispach(elementActions.fetchElements())
             setIsLoading(false);
         }
-        loadProducts();
+        loadElements();
     }, [dispach])
 
     if (isLoading) {
@@ -40,8 +43,8 @@ const ElementsOverviewScreen = props => {
             <Text>Brak elementów do wyświetlenia</Text>
         </View>
     }
-        // console.log(elements)
     return (
+        <SafeAreaView style={styles.container}>
         <View style={styles.screen}>
             {/*<BannerAdd/>*/}
 
@@ -63,7 +66,7 @@ const ElementsOverviewScreen = props => {
                                     elementActive: itemData.item.active,
                                     elementIcon: itemData.item.icon,
                                 },
-                                console.log('navigate'))
+                            )
                         }}
                     >
                         <Button
@@ -85,6 +88,7 @@ const ElementsOverviewScreen = props => {
                 )}
             />
         </View>
+        </SafeAreaView>
     );
 };
 
@@ -110,7 +114,6 @@ const styles = StyleSheet.create({
     screen:
         {
             backgroundColor: Colors.secondary,
-            paddingBottom: 30
         },
     list:
         {

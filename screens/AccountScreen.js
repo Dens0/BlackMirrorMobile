@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Platform} from 'react-native';
+import {View, Text, StyleSheet, Platform, Button, Linking} from 'react-native';
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import HeaderButton from "../components/UI/HeaderButton";
 import Colors from "../constants/Colors";
@@ -10,8 +10,7 @@ const AccountScreen = props => {
         <>
             <BannerAdd/>
         <View style={styles.screen}>
-
-            <Text>KONTA ZEWNĘTRZNE</Text>
+            <Button title='Konta zewnętrzne Black Mirror' onPress={ ()=> Linking.openURL('https://myblackmirror.pl/admin/help') } />
         </View>
     </>
             );

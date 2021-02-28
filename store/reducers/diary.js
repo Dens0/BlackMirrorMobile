@@ -9,7 +9,6 @@ export default (state = initialState, action) => {
             return {
                 availableDairy: action.diaries
             }
-
     }
     return state;
 };

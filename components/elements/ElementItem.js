@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
         // backgroundColor:Colors.secondary
     },
     touchable: {
-
         overflow: 'hidden',
         backgroundColor: Colors.primary
     },
@@ -86,7 +85,6 @@ const styles = StyleSheet.create({
         color: '#f5f5f5',
         justifyContent: 'center',
         alignContent: 'center',
-
     },
 
 });

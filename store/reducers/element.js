@@ -1,25 +1,14 @@
-import {UPDATE_ELEMENTS, SET_ELEMENTS} from "../actions/elements";
-import Element from "../../models/element";
-
+import { SET_ELEMENT_CONFIG} from "../actions/element";
 const initialState = {
     // availableElements: ELEMENTS,
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case SET_ELEMENTS:
+        case SET_ELEMENT_CONFIG:
             return {
-                availableElements: action.elements
+                availableConfig: action.elementConfig
             }
-        case UPDATE_ELEMENTS:
-            const availableElementsIndex = state.availableElements.findIndex(prod => prod.id === action.pid)
-            const updatedElement = new Element(
-                action.pid,
-                action.active,
-            );
-            const updatedAvailableElements = [...state.availableElements]
-            updatedAvailableElements[availableElementsIndex] = updatedElement
-            return {...state, availableElements: updatedAvailableElements}
     }
     return state;
 };

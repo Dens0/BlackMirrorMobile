@@ -4,14 +4,17 @@ import { Provider } from 'react-redux';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import ReduxThunk from 'redux-thunk'
-import elementsReducer from './store/reducers/element';
+import elementsReducer from './store/reducers/elements';
 import authReducer from './store/reducers/auth';
+import elementReducer from './store/reducers/element';
 import diaryReducer from './store/reducers/diary'
 import NavigationContainer from "./navigation/NavigationContainer";
 const rootReducer = combineReducers({
   elements: elementsReducer,
   auth: authReducer,
   diaries: diaryReducer,
+  elementConfig: elementReducer,
+
 });
 const store = createStore(rootReducer,applyMiddleware(ReduxThunk));
 
@@ -43,11 +46,4 @@ export default function App() {
     </Provider>
   );
 }
-// return(
-//     <AdMobBanner
-//         bannerSize="banner"
-//         adUnitID="ca-app-pub-8731014179800764/2334467495" // Test ID, Replace with your-admob-unit-id
-//         servePersonalizedAds // true or false
-//         onDidFailToReceiveAdWithError={this.bannerError} />
-//
-// );
+

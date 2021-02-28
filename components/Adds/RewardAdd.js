@@ -89,13 +89,10 @@ const styles = StyleSheet.create({
     },
     bannerAd: {
         position: "absolute",
-        // width: "100%",
-        // bottom: 0
     },
     interstitialBanner: {
         width: "100%",
         marginLeft: 0,
-        // color: Platform.OS === 'android' ? 'red' : 'pink',
         padding:30,
 
 
@@ -107,7 +104,8 @@ const styles = StyleSheet.create({
     },
     info:{
         marginBottom: 60,
-        fontSize: 18,
+        fontSize: 16,
+        textAlign:'center',
         color: Colors.light
     }
 });
